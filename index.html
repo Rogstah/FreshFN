@@ -1,64 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexum | Home</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,900;1,900&display=swap');
-        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.4); }
-        .nav-blur { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .btn-yellow { background-color: #facc15; color: black; font-weight: 900; text-transform: uppercase; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(250, 204, 21, 0.2); }
-        .btn-yellow:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(250, 204, 21, 0.4); background-color: #fde047; }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-        .news-card { background: #0f0f0f; border: 1px solid #1f1f1f; transition: all 0.3s ease; }
-        .news-card:hover { border-color: #facc15; transform: translateY(-5px); }
-        .gradient-overlay { background: linear-gradient(0deg, #050505 0%, rgba(5,5,5,0) 100%); position: absolute; bottom: 0; left: 0; right: 0; height: 50%; }
-        .logo { font-weight: 900; font-style: italic; font-size: 1.5rem; text-transform: uppercase; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERA</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0d1117; color: #fff; font-family: 'Arial Black', Arial, sans-serif; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: #0d1117;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 44px;
+}
+.nav-logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: #fff; }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { color: #aaa; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 1px; transition: color 0.2s; }
+.nav-links a:hover { color: #fff; }
+.nav-links a.active { color: #fff; }
+
+.hero {
+  position: relative; margin-top: 44px;
+  width: 100%; height: 480px; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, #7a4a10 0%, #c07820 15%, #e09030 22%, #c86020 38%, #a03010 52%, #701010 67%, #400808 82%, #200404 100%);
+}
+.hero-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 65% 40%, rgba(255,140,20,0.35) 0%, rgba(200,70,20,0.2) 40%, transparent 70%);
+}
+.hero-darken {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.28) 48%, rgba(0,0,0,0.05) 100%);
+}
+.hero-content {
+  position: absolute; left: 60px; top: 50%; transform: translateY(-50%); z-index: 2;
+}
+.hero-subtitle {
+  font-size: 15px; font-weight: 800; letter-spacing: 4px; color: #fff;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
+  opacity: 0; transform: translateY(30px);
+  animation: fadeUp 0.7s ease forwards 0.2s;
+}
+.hero-title {
+  font-size: 96px; font-weight: 900; line-height: 0.88;
+  color: #fff; text-transform: uppercase; font-style: italic;
+  text-shadow: 5px 5px 0 rgba(0,0,0,0.55), 0 0 60px rgba(255,180,0,0.15);
+  opacity: 0; transform: translateY(40px);
+  animation: fadeUp 0.85s ease forwards 0.5s;
+}
+.hero-btn {
+  display: inline-block; margin-top: 30px;
+  background: #FFE000; color: #000;
+  font-size: 14px; font-weight: 900; letter-spacing: 2px;
+  padding: 14px 30px; text-decoration: none; text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 0 100%);
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards 0.95s;
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+}
+.hero-btn:hover {
+  background: #fff; transform: scale(1.06);
+  box-shadow: 0 0 28px rgba(255,224,0,0.65);
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-cut {
+  position: absolute; bottom: -1px; left: 0; right: 0; height: 90px;
+  background: #0d1117;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  z-index: 2;
+}
+
+section { padding: 60px 40px; }
+h2.section-title {
+  text-align: center; font-size: 28px; font-weight: 900;
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 36px; color: #fff;
+}
+
+.news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; max-width: 1200px; margin: 0 auto; }
+.news-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; max-width: 1200px; margin: 5px auto 0; }
+.community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; max-width: 1200px; margin: 0 auto; }
+
+.news-card, .community-card {
+  position: relative; overflow: hidden; cursor: pointer;
+}
+.news-card:hover .card-inner, .community-card:hover .card-inner { transform: scale(1.04); }
+.card-inner {
+  width: 100%; height: 100%; transition: transform 0.3s;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 6px;
+}
+.news-badge {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  background: #ff1493; color: #fff; font-size: 10px; font-weight: 900;
+  padding: 3px 8px; letter-spacing: 1px;
+}
+
+.bg-s8-hero { background: linear-gradient(140deg, #4a2000, #9a5010, #d08030, #e0a040, #c06030, #902020); }
+.bg-s8-fire { background: linear-gradient(160deg, #200010, #500020, #a00040, #e04000, #ff6800); }
+.bg-s8-chars { background: linear-gradient(135deg, #3a2000, #6a3010, #c07040); }
+.bg-s8-lava1 { background: linear-gradient(135deg, #250000, #600000, #b02000, #e04000); }
+.bg-s8-lava2 { background: linear-gradient(135deg, #200000, #500000, #900000, #c01000); }
+.bg-gp1 { background: linear-gradient(135deg, #0a160a, #152515, #1a301a); }
+.bg-gp2 { background: linear-gradient(135deg, #08101a, #101a2a, #182035); }
+.bg-gp3 { background: linear-gradient(135deg, #050d05, #0a1a0a, #0f200f); }
+.bg-gp4 { background: linear-gradient(135deg, #181008, #281810, #301a08); }
+.bg-gp5 { background: linear-gradient(135deg, #081408, #102010, #0a2a0f); }
+.bg-gp6 { background: linear-gradient(135deg, #080e1a, #101828, #182838); }
+
+.lbl { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 5px; letter-spacing: 1px; text-transform: uppercase; }
+.slabel { font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; }
+.sbig { font-size: 28px; font-weight: 900; color: #FFE000; font-style: italic; letter-spacing: 1px; }
+.elim { font-size: 10px; color: #ff4444; margin-top: 4px; letter-spacing: 1px; }
+
+.video-section { text-align: center; padding: 50px 40px 70px; }
+.video-wrapper { max-width: 650px; margin: 0 auto; overflow: hidden; border: 1px solid #1e2530; }
+.video-wrapper iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+
+footer { padding: 28px 40px; text-align: center; color: #555; font-size: 12px; border-top: 1px solid #181d26; }
+</style>
 </head>
 <body>
-    <nav class="nav-blur fixed w-full z-50 px-8 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-10">
-            <div class="logo">Nexum</div>
-            <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[2px] text-gray-400">
-                <a href="index.html" class="text-white">Home</a>
-                <a href="home.html" class="hover:text-white transition">News</a>
-                <a href="#" class="hover:text-white transition">Donations</a>
-            </div>
-        </div>
-        <a href="#" class="btn-yellow px-6 py-2 rounded-full text-[11px]">Download</a>
-    </nav>
-    <section class="relative h-screen flex flex-col items-center justify-center text-center">
-        <img src="https://erafn.dev/assets/img/hero-bg.jpg" class="hero-bg">
-        <div class="gradient-overlay"></div>
-        <div class="relative z-10 animate-float">
-            <h1 class="text-7xl md:text-9xl font-black uppercase italic tracking-tighter">Project Nexum</h1>
-            <p class="text-xl md:text-2xl font-bold text-gray-300 mt-4 uppercase tracking-[5px]">Season 1 Out Now 🌴</p>
-            <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center">
-                <a href="#" class="btn-yellow px-12 py-5 rounded-md text-sm">Play Now</a>
-                <a href="#" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-12 py-5 rounded-md text-sm font-bold uppercase transition">Discord</a>
-            </div>
-        </div>
-    </section>
-    <section class="max-w-7xl mx-auto py-24 px-6">
-        <h2 class="text-3xl font-black uppercase italic mb-12">The latest news!</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="news-card rounded-2xl overflow-hidden group">
-                <div class="h-52 overflow-hidden"><div class="w-full h-full bg-cover bg-center transition duration-500 group-hover:scale-110" style="background-image: url('https://erafn.dev/assets/img/news2.jpg');"></div></div>
-                <div class="p-6">
-                    <span class="text-yellow-500 text-[10px] font-black uppercase tracking-widest">New</span>
-                    <h3 class="text-xl font-bold mt-2 uppercase italic">Content Update #1</h3>
-                    <div class="flex justify-between items-center mt-6 text-gray-500 text-[10px] font-bold uppercase italic">
-                        <span>Nexum - 3/2/2026</span>
-                        <span>1,240 views</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
+<nav>
+  <div class="nav-logo">ERA</div>
+  <div class="nav-links">
+    <a href="#" class="active">Home</a>
+    <a href="#">News</a>
+    <a href="#">Donations</a>
+    <a href="#">Tournaments</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <svg style="position:absolute;right:0;top:0;width:72%;height:100%;z-index:1;opacity:0.09" viewBox="0 0 900 480" preserveAspectRatio="xMaxYMid meet">
+    <ellipse cx="500" cy="430" rx="370" ry="55" fill="#FFB300"/>
+    <circle cx="340" cy="175" r="52" fill="#FF7700"/>
+    <rect x="300" y="218" width="80" height="205" rx="14" fill="#FF5500"/>
+    <circle cx="520" cy="138" r="62" fill="#CC3300"/>
+    <rect x="476" y="188" width="88" height="215" rx="14" fill="#AA2200"/>
+    <circle cx="685" cy="198" r="44" fill="#FFB300"/>
+    <rect x="648" y="238" width="74" height="185" rx="12" fill="#DD9900"/>
+    <circle cx="215" cy="218" r="38" fill="#886600"/>
+    <rect x="186" y="252" width="58" height="172" rx="11" fill="#664400"/>
+    <circle cx="805" cy="228" r="36" fill="#994400"/>
+    <rect x="778" y="260" width="55" height="162" rx="10" fill="#773300"/>
+    <circle cx="145" cy="260" r="28" fill="#554400" opacity="0.7"/>
+    <rect x="122" y="284" width="46" height="145" rx="9" fill="#443300" opacity="0.7"/>
+  </svg>
+  <div class="hero-darken"></div>
+  <div class="hero-content">
+    <div class="hero-subtitle">PROJECT ERA</div>
+    <div class="hero-title">SEASON 8</div>
+    <a href="#" class="hero-btn">DOWNLOAD FOR WINDOWS</a>
+  </div>
+  <div class="hero-cut"></div>
+</div>
+
+<section>
+  <h2 class="section-title">THE LATEST NEWS!</h2>
+  <div class="news-grid">
+    <div class="news-card bg-s8-hero" style="height:308px;">
+      <div class="card-inner">
+        <svg width="130" height="88" viewBox="0 0 130 88" style="opacity:0.55">
+          <ellipse cx="65" cy="76" rx="58" ry="12" fill="#FFB300" opacity="0.45"/>
+          <circle cx="32" cy="26" r="14" fill="#FF6600"/><rect x="22" y="37" width="20" height="38" rx="5" fill="#FF4400"/>
+          <circle cx="65" cy="19" r="16" fill="#CC2200"/><rect x="54" y="32" width="22" height="42" rx="5" fill="#AA1100"/>
+          <circle cx="98" cy="28" r="13" fill="#FFB300"/><rect x="88" y="39" width="20" height="36" rx="5" fill="#DD9900"/>
+          <circle cx="12" cy="38" r="9" fill="#886644" opacity="0.8"/><rect x="6" y="45" width="14" height="30" rx="4" fill="#664422" opacity="0.8"/>
+          <circle cx="118" cy="36" r="10" fill="#994400" opacity="0.8"/><rect x="112" y="44" width="14" height="32" rx="4" fill="#773300" opacity="0.8"/>
+        </svg>
+        <div class="lbl">Season 8 Launch</div>
+      </div>
+      <div class="news-badge">NEW</div>
+    </div>
+    <div class="news-card bg-s8-fire" style="height:308px;">
+      <div class="card-inner">
+        <svg width="100" height="88" viewBox="0 0 100 88" style="opacity:0.55">
+          <path d="M50,5 C28,18 12,40 18,62 C24,76 44,84 50,84 C56,84 76,76 82,62 C88,40 72,18 50,5Z" fill="#FF4400"/>
+          <path d="M50,22 C36,34 28,50 32,64 C36,74 47,80 50,80 C53,80 64,74 68,64 C72,50 64,34 50,22Z" fill="#FF7700"/>
+          <path d="M50,40 C42,48 39,59 42,68 C45,75 50,78 50,78 C50,78 55,75 58,68 C61,59 58,48 50,40Z" fill="#FFCC00"/>
+        </svg>
+        <div class="lbl">Season 8 Update</div>
+      </div>
+    </div>
+  </div>
+  <div class="news-grid-3">
+    <div class="news-card bg-s8-chars" style="height:193px;">
+      <div class="card-inner">
+        <svg width="100" height="68" viewBox="0 0 100 68" style="opacity:0.5">
+          <ellipse cx="50" cy="61" rx="47" ry="9" fill="#FFB300" opacity="0.4"/>
+          <circle cx="22" cy="20" r="11" fill="#FF6600"/><rect x="15" y="29" width="14" height="30" rx="4" fill="#FF4400"/>
+          <circle cx="50" cy="15" r="13" fill="#CC2200"/><rect x="42" y="25" width="16" height="34" rx="4" fill="#AA1100"/>
+          <circle cx="78" cy="21" r="10" fill="#FFB300"/><rect x="72" y="29" width="13" height="30" rx="4" fill="#DD9900"/>
+        </svg>
+        <div class="lbl">Characters</div>
+      </div>
+    </div>
+    <div class="news-card bg-s8-lava1" style="height:193px;">
+      <div class="card-inner">
+        <div class="slabel">FORTNITE</div>
+        <div class="sbig">SEASON 8</div>
+      </div>
+    </div>
+    <div class="news-card bg-s8-lava2" style="height:193px;">
+      <div class="card-inner">
+        <div class="slabel">FORTNITE</div>
+        <div class="sbig">SEASON 8</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:10px;">
+  <h2 class="section-title">WITH AN INCREDIBLE COMMUNITY</h2>
+  <div class="community-grid">
+    <div class="community-card bg-gp1" style="height:228px;">
+      <div class="card-inner">
+        <svg width="90" height="60" viewBox="0 0 90 60" style="opacity:0.38">
+          <rect x="0" y="35" width="90" height="25" fill="#1a3a1a"/>
+          <rect x="5" y="22" width="16" height="38" fill="#2a2a2a"/>
+          <rect x="28" y="24" width="13" height="36" fill="#333"/>
+          <circle cx="50" cy="22" r="9" fill="#886644"/>
+          <rect x="44" y="29" width="12" height="31" rx="3" fill="#664422"/>
+          <rect x="62" y="18" width="28" height="11" rx="3" fill="#3a5a3a"/>
+        </svg>
+        <div class="lbl">Community Gameplay</div>
+        <div class="elim">ELIMINATED lolpera5</div>
+      </div>
+    </div>
+    <div class="community-card bg-gp2" style="height:228px;">
+      <div class="card-inner">
+        <svg width="90" height="60" viewBox="0 0 90 60" style="opacity:0.38">
+          <rect x="0" y="32" width="90" height="28" fill="#181828"/>
+          <rect x="8" y="10" width="20" height="50" fill="#222244"/>
+          <rect x="36" y="16" width="22" height="44" fill="#1a1a3a"/>
+          <circle cx="68" cy="22" r="8" fill="#5555aa"/>
+          <rect x="62" y="28" width="12" height="32" rx="3" fill="#3a3a88"/>
+        </svg>
+        <div class="lbl">Community Gameplay</div>
+      </div>
+    </div>
+    <div class="community-card bg-gp3" style="height:188px;">
+      <div class="card-inner">
+        <svg width="80" height="55" viewBox="0 0 80 55" style="opacity:0.38">
+          <rect x="0" y="0" width="80" height="55" fill="#0a160a"/>
+          <line x1="0" y1="11" x2="80" y2="11" stroke="#1a2a1a" stroke-width="1"/>
+          <line x1="0" y1="22" x2="80" y2="22" stroke="#1a2a1a" stroke-width="1"/>
+          <line x1="0" y1="33" x2="80" y2="33" stroke="#1a2a1a" stroke-width="1"/>
+          <line x1="11" y1="0" x2="11" y2="55" stroke="#1a2a1a" stroke-width="1"/>
+          <line x1="22" y1="0" x2="22" y2="55" stroke="#1a2a1a" stroke-width="1"/>
+          <line x1="33" y1="0" x2="33" y2="55" stroke="#1a2a1a" stroke-width="1"/>
+          <circle cx="40" cy="27" r="7" fill="#5a8a5a" opacity="0.7"/>
+          <circle cx="40" cy="27" r="3" fill="#8acc8a" opacity="0.8"/>
+        </svg>
+        <div class="lbl">Map View</div>
+      </div>
+    </div>
+    <div class="community-card bg-gp4" style="height:188px;">
+      <div class="card-inner">
+        <svg width="80" height="55" viewBox="0 0 80 55" style="opacity:0.38">
+          <rect x="5" y="30" width="70" height="22" fill="#5a4020"/>
+          <rect x="8" y="12" width="15" height="40" fill="#8a6030"/>
+          <rect x="27" y="16" width="13" height="36" fill="#7a5525"/>
+          <rect x="44" y="13" width="15" height="39" fill="#8a6030"/>
+          <rect x="63" y="20" width="10" height="32" fill="#7a5525"/>
+        </svg>
+        <div class="lbl">Building</div>
+      </div>
+    </div>
+    <div class="community-card bg-gp5" style="height:188px;">
+      <div class="card-inner">
+        <svg width="80" height="55" viewBox="0 0 80 55" style="opacity:0.38">
+          <ellipse cx="40" cy="46" rx="40" ry="10" fill="#1a3a1a"/>
+          <circle cx="40" cy="25" r="12" fill="#336633"/>
+          <circle cx="16" cy="36" r="6" fill="#558855" opacity="0.6"/>
+          <circle cx="64" cy="34" r="7" fill="#558855" opacity="0.6"/>
+          <circle cx="28" cy="42" r="4" fill="#449944" opacity="0.5"/>
+          <circle cx="55" cy="41" r="5" fill="#449944" opacity="0.4"/>
+        </svg>
+        <div class="lbl">Loot Lake</div>
+      </div>
+    </div>
+    <div class="community-card bg-gp6" style="height:188px;">
+      <div class="card-inner">
+        <svg width="80" height="55" viewBox="0 0 80 55" style="opacity:0.38">
+          <rect x="0" y="36" width="80" height="19" fill="#1a2030"/>
+          <rect x="8" y="20" width="55" height="18" fill="#283040"/>
+          <rect x="20" y="10" width="40" height="12" fill="#303848"/>
+          <circle cx="40" cy="18" r="9" fill="#4060a0"/>
+          <rect x="34" y="25" width="12" height="30" rx="3" fill="#304870"/>
+        </svg>
+        <div class="lbl">Outdoor Gameplay</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="video-section">
+  <h2 class="section-title">PLAY NOW!</h2>
+  <div class="video-wrapper">
+    <iframe
+      src="https://www.youtube.com/embed/2wcj6mTgr6g"
+      title="Project Era - Season 7 Cinematic Trailer"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<footer>&copy; 2024 Project ERA. All rights reserved.</footer>
 </body>
 </html>
