@@ -1,84 +1,64 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Era | Home</title>
+    <title>Nexum | Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background-color: #0a0a0a; color: white; font-family: sans-serif; }
-        .hero-gradient { background: linear-gradient(180deg, rgba(0,0,0,0) 0%, #0a0a0a 100%); }
-        .card { background: #151515; border: 1px solid #222; transition: 0.3s; }
-        .card:hover { border-color: #fbbf24; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,900;1,900&display=swap');
+        body { background-color: #050505; color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; filter: brightness(0.4); }
+        .nav-blur { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .btn-yellow { background-color: #facc15; color: black; font-weight: 900; text-transform: uppercase; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(250, 204, 21, 0.2); }
+        .btn-yellow:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(250, 204, 21, 0.4); background-color: #fde047; }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .news-card { background: #0f0f0f; border: 1px solid #1f1f1f; transition: all 0.3s ease; }
+        .news-card:hover { border-color: #facc15; transform: translateY(-5px); }
+        .gradient-overlay { background: linear-gradient(0deg, #050505 0%, rgba(5,5,5,0) 100%); position: absolute; bottom: 0; left: 0; right: 0; height: 50%; }
+        .logo { font-weight: 900; font-style: italic; font-size: 1.5rem; text-transform: uppercase; }
     </style>
 </head>
 <body>
-
-    <nav class="flex items-center justify-between px-8 py-4 bg-black/50 sticky top-0 z-50 backdrop-blur-md">
-        <div class="flex items-center gap-8">
-            <img src="https://erafn.dev/assets/img/logo.png" alt="Era Logo" class="h-10">
-            <div class="hidden md:flex gap-6 text-sm font-bold uppercase tracking-widest">
-                <a href="index.html" class="text-yellow-500">Home</a>
-                <a href="news.html" class="hover:text-yellow-500">News</a>
-                <a href="donations.html" class="hover:text-yellow-500">Donations</a>
-                <a href="tournaments.html" class="hover:text-yellow-500">Tournaments</a>
+    <nav class="nav-blur fixed w-full z-50 px-8 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-10">
+            <div class="logo">Nexum</div>
+            <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[2px] text-gray-400">
+                <a href="index.html" class="text-white">Home</a>
+                <a href="home.html" class="hover:text-white transition">News</a>
+                <a href="#" class="hover:text-white transition">Donations</a>
             </div>
         </div>
-        <a href="download.html" class="bg-yellow-500 text-black px-6 py-2 rounded-full font-bold uppercase text-xs">Download</a>
+        <a href="#" class="btn-yellow px-6 py-2 rounded-full text-[11px]">Download</a>
     </nav>
-
-    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
-        <img src="https://erafn.dev/assets/img/hero-bg.jpg" class="absolute inset-0 w-full h-full object-cover opacity-50">
-        <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center px-4">
-            <h1 class="text-6xl md:text-8xl font-black italic uppercase italic">Project Era</h1>
-            <p class="text-xl mt-4 text-gray-300">Season 8 Out Now 🌴</p>
-            <div class="mt-8 flex gap-4 justify-center">
-                <a href="download.html" class="bg-white text-black px-10 py-4 rounded-md font-black uppercase">Play Now</a>
-                <a href="https://discord.gg/erafn" class="bg-indigo-600 text-white px-10 py-4 rounded-md font-black uppercase">Discord</a>
+    <section class="relative h-screen flex flex-col items-center justify-center text-center">
+        <img src="https://erafn.dev/assets/img/hero-bg.jpg" class="hero-bg">
+        <div class="gradient-overlay"></div>
+        <div class="relative z-10 animate-float">
+            <h1 class="text-7xl md:text-9xl font-black uppercase italic tracking-tighter">Project Nexum</h1>
+            <p class="text-xl md:text-2xl font-bold text-gray-300 mt-4 uppercase tracking-[5px]">Season 1 Out Now 🌴</p>
+            <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#" class="btn-yellow px-12 py-5 rounded-md text-sm">Play Now</a>
+                <a href="#" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-12 py-5 rounded-md text-sm font-bold uppercase transition">Discord</a>
             </div>
         </div>
     </section>
-
-    <section class="max-w-6xl mx-auto py-20 px-6">
-        <h2 class="text-3xl font-black uppercase mb-10">The latest news!</h2>
+    <section class="max-w-7xl mx-auto py-24 px-6">
+        <h2 class="text-3xl font-black uppercase italic mb-12">The latest news!</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="card p-4 rounded-xl">
-                <div class="h-48 bg-gray-800 rounded-lg mb-4 bg-cover" style="background-image: url('https://erafn.dev/assets/img/news2.jpg')"></div>
-                <span class="text-yellow-500 text-xs font-bold uppercase">New</span>
-                <h3 class="text-xl font-bold mt-2">CONTENT UPDATE #2</h3>
-                <p class="text-gray-400 text-sm mt-2">Adventure awaits in the latest update...</p>
-                <div class="flex justify-between items-center mt-6 text-xs text-gray-500">
-                    <span>ahc - 2/21/2026</span>
-                    <span>740 views</span>
-                </div>
-            </div>
-
-            <div class="card p-4 rounded-xl">
-                <div class="h-48 bg-gray-800 rounded-lg mb-4 bg-cover" style="background-image: url('https://erafn.dev/assets/img/news1.jpg')"></div>
-                <h3 class="text-xl font-bold mt-2">CONTENT UPDATE #1</h3>
-                <p class="text-gray-400 text-sm mt-2">The volcano is erupting!</p>
-                <div class="flex justify-between items-center mt-6 text-xs text-gray-500">
-                    <span>ahc - 2/10/2026</span>
-                    <span>1189 views</span>
-                </div>
-            </div>
-
-            <div class="card p-4 rounded-xl">
-                <div class="h-48 bg-gray-800 rounded-lg mb-4 bg-cover" style="background-image: url('https://erafn.dev/assets/img/s8.jpg')"></div>
-                <h3 class="text-xl font-bold mt-2">SEASON 8 IS HERE</h3>
-                <p class="text-gray-400 text-sm mt-2">Jump into the jungle today.</p>
-                <div class="flex justify-between items-center mt-6 text-xs text-gray-500">
-                    <span>ahc - 1/29/2026</span>
-                    <span>2940 views</span>
+            <div class="news-card rounded-2xl overflow-hidden group">
+                <div class="h-52 overflow-hidden"><div class="w-full h-full bg-cover bg-center transition duration-500 group-hover:scale-110" style="background-image: url('https://erafn.dev/assets/img/news2.jpg');"></div></div>
+                <div class="p-6">
+                    <span class="text-yellow-500 text-[10px] font-black uppercase tracking-widest">New</span>
+                    <h3 class="text-xl font-bold mt-2 uppercase italic">Content Update #1</h3>
+                    <div class="flex justify-between items-center mt-6 text-gray-500 text-[10px] font-bold uppercase italic">
+                        <span>Nexum - 3/2/2026</span>
+                        <span>1,240 views</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <footer class="border-t border-white/10 py-10 text-center text-gray-500 text-sm">
-        <p>&copy; 2026 EraFN. Not affiliated with Epic Games.</p>
-    </footer>
-
 </body>
 </html>
