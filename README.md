@@ -1,2 +1,2 @@
 # FreshFN
-OGFN Launcher
+OG Fortnite
