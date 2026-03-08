@@ -1,128 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fresh</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&family=Barlow+Condensed:wght@800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;background:#0d0f14;font-family:'Rajdhani',sans-serif;overflow-x:hidden;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-nav{
-  position:fixed;top:0;left:0;width:100%;z-index:100;
-  background:rgba(13,15,20,0.95);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;height:48px;
-}
-.nav-logo{
-  color:#fff;font-size:20px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;
-}
-.nav-links{display:flex;gap:6px;list-style:none;}
-.nav-links li a{
-  color:#b0b8c8;text-decoration:none;font-size:13px;font-weight:700;
-  letter-spacing:1px;text-transform:uppercase;padding:6px 14px;
-  border-radius:3px;transition:color 0.15s,background 0.15s;
-}
-.nav-links li a.active{background:#2a3a5c;color:#fff;}
-.nav-links li a:hover{color:#fff;}
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111;
+      --border: #222;
+      --accent: #e8ff47;
+      --text: #f0f0f0;
+      --muted: #555;
+    }
 
-.hero-wrap{
-  position:relative;
-  margin-top:48px;
-  width:100%;
-  height:calc(100vh - 48px);
-  max-height:520px;
-  overflow:hidden;
-}
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
 
-.hero-bg{
-  position:absolute;inset:0;
-  background:url('banner.png') center 20%/cover no-repeat;
-  z-index:0;
-}
+    /* Subtle grain texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
 
-.hero-bg::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to right, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.18) 50%, rgba(0,0,0,0.05) 100%);
-  z-index:1;
-}
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+      animation: fadeUp 0.6s ease both;
+    }
 
-.diagonal-cut{
-  position:absolute;bottom:0;left:0;width:100%;z-index:2;
-  height:90px;
-  background:#0d0f14;
-  clip-path:polygon(0 60%, 100% 0%, 100% 100%, 0% 100%);
-}
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-.hero-content{
-  position:relative;z-index:3;
-  padding:clamp(40px,7vw,90px) clamp(28px,5vw,80px);
-  display:flex;flex-direction:column;align-items:flex-start;
-  height:100%;justify-content:center;
-}
+    header {
+      margin-bottom: 1.5rem;
+    }
 
-.hero-sub{
-  color:#e8e8e8;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(13px,1.3vw,17px);
-  font-weight:800;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  text-shadow:0 1px 6px rgba(0,0,0,0.8);
-  margin-bottom:2px;
-}
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
 
-.hero-title{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(60px,9vw,120px);
-  font-weight:900;
-  color:#fff;
-  line-height:0.9;
-  text-transform:uppercase;
-  letter-spacing:-1px;
-  text-shadow:3px 3px 0 rgba(0,0,0,0.4);
-  margin-bottom:clamp(18px,2.5vw,32px);
-}
+    h1 {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
 
-.hero-btn{
-  display:inline-block;
-  background:#f5d800;
-  color:#000;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:clamp(14px,1.4vw,18px);
-  font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  padding:14px 36px;
-  text-decoration:none;
-  transition:background 0.15s,transform 0.1s;
-}
-.hero-btn:hover{background:#ffe500;transform:scale(1.03);}
-</style>
+    .subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* Input row */
+    .input-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]::placeholder { color: var(--muted); }
+    input[type="text"]:focus { border-color: var(--accent); }
+
+    button {
+      background: var(--accent);
+      color: #0a0a0a;
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.65rem 1.1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    button:hover { opacity: 0.85; }
+    button:active { transform: scale(0.97); }
+
+    /* Video box */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+    }
+
+    .placeholder svg { opacity: 0.3; }
+
+    .placeholder-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <header>
+      <div class="label">// video player</div>
+      <h1>Watch anything.</h1>
+      <p class="subtitle">Klistra in en YouTube-länk nedan</p>
+    </header>
 
-<nav>
-  <div class="nav-logo">Fresh</div>
-  <ul class="nav-links">
-    <li><a href="#" class="active">Home</a></li>
-    <li><a href="#">News</a></li>
-    <li><a href="#">Donations</a></li>
-    <li><a href="#">Tournaments</a></li>
-  </ul>
-</nav>
+    <div class="input-row">
+      <input type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=..." />
+      <button onclick="loadVideo()">Spela ▶</button>
+    </div>
 
-<div class="hero-wrap">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <span class="hero-sub">Project Fresh</span>
-    <div class="hero-title">SEASON 8</div>
-    <a href="#" class="hero-btn">DOWNLOAD FOR WINDOWS</a>
+    <div class="video-wrapper" id="videoBox">
+      <div class="placeholder" id="placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        <span class="placeholder-text">ingen video vald</span>
+      </div>
+    </div>
+
+    <footer>
+      Byggt med &lt;3 · <a href="https://github.com" target="_blank">GitHub Pages</a>
+    </footer>
   </div>
-  <div class="diagonal-cut"></div>
-</div>
 
+  <script>
+    function extractVideoId(url) {
+      const patterns = [
+        /(?:v=|\/embed\/|\/shorts\/|youtu\.be\/)([A-Za-z0-9_-]{11})/,
+      ];
+      for (const p of patterns) {
+        const m = url.match(p);
+        if (m) return m[1];
+      }
+      return null;
+    }
+
+    function loadVideo() {
+      const url = document.getElementById('urlInput').value.trim();
+      const id = extractVideoId(url);
+      const box = document.getElementById('videoBox');
+
+      if (!id) {
+        document.getElementById('urlInput').style.borderColor = '#ff4747';
+        setTimeout(() => document.getElementById('urlInput').style.borderColor = '', 1200);
+        return;
+      }
+
+      box.innerHTML = `<iframe
+        src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>`;
+    }
+
+    // Allow pressing Enter
+    document.getElementById('urlInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') loadVideo();
+    });
+  </script>
 </body>
 </html>
