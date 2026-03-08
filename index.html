@@ -1,235 +1,54 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+  <title></title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0a0a0a;
-      --surface: #111;
-      --border: #222;
-      --accent: #e8ff47;
-      --text: #f0f0f0;
-      --muted: #555;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Syne', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    /* Subtle grain texture */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.5;
-    }
-
-    .container {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 560px;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    header {
-      margin-bottom: 1.5rem;
-    }
-
-    .label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-
-    h1 {
-      font-size: clamp(1.6rem, 5vw, 2.4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .subtitle {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 0.5rem;
-    }
-
-    /* Input row */
-    .input-row {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    input[type="text"] {
-      flex: 1;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-family: 'Space Mono', monospace;
-      font-size: 0.78rem;
-      padding: 0.65rem 0.9rem;
-      border-radius: 4px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    input[type="text"]::placeholder { color: var(--muted); }
-    input[type="text"]:focus { border-color: var(--accent); }
-
-    button {
-      background: var(--accent);
-      color: #0a0a0a;
-      border: none;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.65rem 1.1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: opacity 0.15s, transform 0.1s;
-    }
-    button:hover { opacity: 0.85; }
-    button:active { transform: scale(0.97); }
-
-    /* Video box */
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .video-wrapper iframe {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    .placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      color: var(--muted);
-    }
-
-    .placeholder svg { opacity: 0.3; }
-
-    .placeholder-text {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-    }
-
-    footer {
-      margin-top: 1.25rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; }
+    .box { width: 320px; height: 180px; background: #fff; position: relative; overflow: hidden; }
+    .box iframe { position: absolute; top: -60px; left: -10px; width: 340px; height: 300px; border: none; pointer-events: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="label">// video player</div>
-      <h1>Watch anything.</h1>
-      <p class="subtitle">Klistra in en YouTube-länk nedan</p>
-    </header>
-
-    <div class="input-row">
-      <input type="text" id="urlInput" placeholder="https://www.youtube.com/watch?v=..." />
-      <button onclick="loadVideo()">Spela ▶</button>
-    </div>
-
-    <div class="video-wrapper" id="videoBox">
-      <div class="placeholder" id="placeholder">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <polygon points="5 3 19 12 5 21 5 3"/>
-        </svg>
-        <span class="placeholder-text">ingen video vald</span>
-      </div>
-    </div>
-
-    <footer>
-      Byggt med &lt;3 · <a href="https://github.com" target="_blank">GitHub Pages</a>
-    </footer>
+  <div class="box">
+    <iframe id="player" src="https://www.youtube.com/embed/z6PsGr-L27M?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&start=165&enablejsapi=1" allow="autoplay" allowfullscreen></iframe>
   </div>
-
   <script>
-    function extractVideoId(url) {
-      const patterns = [
-        /(?:v=|\/embed\/|\/shorts\/|youtu\.be\/)([A-Za-z0-9_-]{11})/,
-      ];
-      for (const p of patterns) {
-        const m = url.match(p);
-        if (m) return m[1];
+    const START = 165;
+    const END = 175;
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    let player;
+
+    window.onYouTubeIframeAPIReady = function() {
+      player = new YT.Player('player', {
+        events: {
+          onReady: function(e) {
+            e.target.seekTo(START, true);
+            e.target.playVideo();
+          },
+          onStateChange: function(e) {
+            if (e.data === YT.PlayerState.PAUSED) {
+              e.target.playVideo();
+            }
+          }
+        }
+      });
+    };
+
+    setInterval(function() {
+      if (!player || !player.getCurrentTime) return;
+      const t = player.getCurrentTime();
+      if (t >= END) {
+        player.seekTo(START, true);
+        player.playVideo();
       }
-      return null;
-    }
-
-    function loadVideo() {
-      const url = document.getElementById('urlInput').value.trim();
-      const id = extractVideoId(url);
-      const box = document.getElementById('videoBox');
-
-      if (!id) {
-        document.getElementById('urlInput').style.borderColor = '#ff4747';
-        setTimeout(() => document.getElementById('urlInput').style.borderColor = '', 1200);
-        return;
-      }
-
-      box.innerHTML = `<iframe
-        src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>`;
-    }
-
-    // Allow pressing Enter
-    document.getElementById('urlInput').addEventListener('keydown', e => {
-      if (e.key === 'Enter') loadVideo();
-    });
+    }, 500);
   </script>
 </body>
 </html>
